@@ -1,18 +1,22 @@
-# Step 2: Ask an AI assistant to set up the computer
+# Step 2: Ask an AI assistant to set up the computer for a project
 
-After GitHub account and organization access are ready, give this prompt to Codex, Claude, Cursor, Gemini, GitHub Copilot, or another AI assistant that can use the local terminal or computer.
+Give this prompt to Codex, Claude, Cursor, Gemini, GitHub Copilot, or another AI assistant that can use the local terminal or computer. Replace the project placeholder with the actual Teen Health project URL or repository name.
 
 ```text
-Set up this computer for the Teen Health, Inc. Outside the City website.
+Set up this computer for the Teen Health, Inc. project at [paste the project's GitHub URL or repository name here].
+
+Use this public onboarding guide as your first source of instructions:
+https://github.com/Teen-Health-Inc/team-onboarding
 
 First, detect whether this is macOS, Windows, or Linux. Check which required tools are already installed before making changes.
 
 Required tools:
 - Git
 - GitHub Desktop or GitHub CLI (`gh`)
-- Node.js 22.x and npm
 
 Use official installation methods only. For a nontechnical user, prefer GitHub Desktop on macOS or Windows because it provides a graphical GitHub login and repository-cloning flow. Use GitHub CLI when it is already installed or when the user prefers the terminal. Do not assume Homebrew is installed.
+
+Do not assume this is a JavaScript or website project. After cloning the target project, read its README and project instructions to determine the required runtime, package manager, dependencies, development command, and validation commands. Install only what that project requires.
 
 Security rules:
 - Never ask me to paste a computer password, GitHub token, SSH key, private key, or one-time login code into this chat.
@@ -23,13 +27,13 @@ Security rules:
 
 After the tools are ready:
 1. Verify Git, GitHub Desktop or `gh`, Node.js, and npm.
-2. Confirm that my own GitHub account can access `Teen-Health-Inc/outside-the-city`.
-3. Clone the repository into a normal development folder, without overwriting an existing folder.
-4. Read the repository's `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, `docs/ai-change-guide.md`, and `docs/website-map.md`.
-5. Run `npm ci`.
-6. Start the local site with `npm run dev` and tell me to open http://localhost:3000.
+2. Confirm that my own GitHub account can access the target project.
+3. Clone the target repository into a normal development folder, without overwriting an existing folder.
+4. Read its `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and any project-specific setup or development documentation that exists.
+5. Install the dependencies using the project's documented package manager and command.
+6. Run the project's documented local development command and tell me how to open or use it.
 
-Do not edit website files, create a branch, commit, push, merge, or deploy anything during this setup. If access, permissions, network, or an existing folder prevents progress, stop and explain the exact next action instead of guessing.
+Do not edit project files, create a branch, commit, push, merge, or deploy anything during this setup. If the project URL is missing, access, permissions, network, or an existing folder prevents progress, stop and explain the exact next action instead of guessing.
 ```
 
 ## If the AI cannot use the computer

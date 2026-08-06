@@ -1,24 +1,24 @@
 # Step 1: GitHub account and organization access
 
-Complete this step before asking an AI assistant to install tools or clone the website.
+Complete this step before asking an AI assistant to install tools or clone a project.
 
 ## If you already use GitHub
 
 1. Sign in at <https://github.com>.
 2. Confirm that your email address is verified.
-3. Ask the Teen Health organization owner or administrator to invite that GitHub account to `Teen-Health-Inc`.
+3. Ask the Teen Health project owner or organization administrator to grant that GitHub account access to the target project. For private projects owned by `Teen-Health-Inc`, this may mean joining the organization.
 4. Open the invitation email and accept it.
-5. Open the private website repository: <https://github.com/Teen-Health-Inc/outside-the-city>.
+5. Open the target project repository.
 
-If you can see the repository, your access is ready. You do not need to be the repository owner.
+If you can see the target repository, your access is ready. You do not need to be the repository owner.
 
 ## If you do not have a GitHub account
 
 1. Create one at <https://github.com/signup> using an email address you control.
 2. Verify the email address through GitHub's email.
-3. Send your GitHub username or verified email address to the Teen Health organization owner so they can send the organization invitation.
+3. Send your GitHub username or verified email address to the project owner or Teen Health organization administrator so they can grant access.
 4. Accept the invitation from the email link.
-5. Open the private website repository to confirm access.
+5. Open the target project repository to confirm access.
 
 Use your own account. Do not use a coworker's account, shared password, personal access token, or SSH private key.
 
@@ -40,6 +40,6 @@ Stop and contact the organization owner or administrator. Ask them to verify:
 - The invitation was sent to the email address associated with your GitHub account.
 - Your email address is verified.
 - You accepted the current invitation.
-- Your account has access to `Teen-Health-Inc/outside-the-city`.
+- Your account has access to the target project repository.
 
 Do not try to work around an access error with another person's account or token.
