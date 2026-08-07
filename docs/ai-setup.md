@@ -1,55 +1,57 @@
 # Step 2: Ask an AI assistant to set up the computer for a project
 
-Give this prompt to Codex, Claude Code, or another AI coding assistant that can use the local terminal or computer. Replace the project placeholder with the actual Teen Health project URL or repository name.
-
-If you are using Claude Desktop, start in the **Code** tab, choose the **Local** environment, and select an empty working folder. Do not use the Chat or Cowork tabs for this setup. Do not install or suggest GitHub Desktop.
+The shortest first request is the most reliable one:
 
 ```text
-Set up this computer for the Teen Health, Inc. project at [paste the project's GitHub URL or repository name here].
-
-Use this public onboarding guide as your first source of instructions:
-https://github.com/Teen-Health-Inc/team-onboarding
-
-First, detect whether this is macOS, Windows, or Linux. Check which required tools are already installed before making changes.
-
-Required tools:
-- Git
-- GitHub CLI (`gh`)
-
-Use official installation methods only. Install GitHub CLI (`gh`) using the platform's official package instructions. Do not assume Homebrew is installed. Do not install or suggest GitHub Desktop.
-
-Do not assume this is a JavaScript or website project. After cloning the target project, read its README and project instructions to determine the required runtime, package manager, dependencies, development command, and validation commands. Install only what that project requires.
-
-Security rules:
-- Never ask me to paste a computer password, GitHub token, SSH key, private key, or one-time login code into this chat.
-- If the operating system displays an administrator or password prompt, tell me to enter the password directly into that operating system prompt or my own Terminal/PowerShell window.
-- Use the official GitHub browser login flow. Do not create or request a personal access token just to avoid browser authentication.
-- Do not use another person's GitHub account or credentials.
-- Do not access production, the VPS, deployment secrets, DNS, SSH keys, or server configuration.
-
-After the tools are ready:
-1. Verify Git and `gh`.
-2. Check `gh auth status`. If it is not authenticated to GitHub.com, run this command yourself:
-
-   `gh auth login --hostname github.com --git-protocol https --web`
-
-   Do not merely tell me to run it. Wait for the command to open or display GitHub's browser link and one-time verification code. Tell me to open the link and enter the code on GitHub's page. Do not ask me to paste the code into this chat. Wait until I finish, then run `gh auth status` again.
-3. Confirm that my own GitHub account can access the target project.
-4. Clone the target repository into a normal development folder, without overwriting an existing folder.
-5. Read its `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and any project-specific setup or development documentation that exists.
-6. Install the dependencies using the project's documented package manager and command.
-7. Run the project's documented local development command and tell me how to open or use it.
-
-Do not edit project files, create a branch, commit, push, merge, or deploy anything during this setup. If I am not using a local Code/terminal-capable session, stop and tell me to switch to one. If the project URL is missing, access, permissions, network, or an existing folder prevents progress, stop and explain the exact next action instead of guessing.
+Help me set up my computer for this Teen Health project. Use this onboarding guide first:
+https://teen-health-inc.github.io/team-onboarding/
 ```
+
+After reading the guide, the AI should ask which Teen Health project you need if you have not provided a project URL or repository name. Give it the target project's GitHub URL when it asks. It must not guess.
+
+## Claude Desktop
+
+Use the **Code** tab, not Chat or Cowork. Choose the **Local** environment and select an empty working folder or the folder where you want the project cloned. If Claude is not in Code mode, it should stop and ask you to switch before attempting setup.
+
+Do not install or use GitHub Desktop for this workflow. The supported GitHub path is GitHub CLI (`gh`).
+
+## What the AI should do after reading this guide
+
+The AI should:
+
+1. Detect whether the computer uses macOS, Windows, or Linux.
+2. Check whether Git and GitHub CLI (`gh`) are installed.
+3. Install missing tools using official platform instructions. Do not assume Homebrew is installed.
+4. Check whether GitHub CLI is already authenticated:
+
+   ```bash
+   gh auth status
+   ```
+
+5. If GitHub CLI is not authenticated, run this command itself:
+
+   ```bash
+   gh auth login --hostname github.com --git-protocol https --web
+   ```
+
+   The AI must not merely tell the user to run the command. It must start the command, wait for GitHub to open or display the browser link and one-time verification code, and tell the user to complete that step on GitHub's page. The code must never be pasted into the AI chat.
+
+6. Run `gh auth status` again after the browser flow completes.
+7. Confirm that the user's account can access the target project.
+8. Clone the target project into a normal development folder without overwriting an existing folder.
+9. Read the target project's `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and any relevant setup, development, architecture, or testing documentation that exists.
+10. Install dependencies and run the local development command documented by that project.
+
+Do not assume the target project uses Node.js, npm, Next.js, or a browser-based development server. The target project's documentation is the source of truth for its tools and commands.
+
+## Security boundaries
+
+- Never ask for a computer password, GitHub token, SSH key, private key, or one-time login code in the AI chat.
+- Tell the user to enter computer passwords into the operating system's own prompt or their own Terminal/PowerShell window.
+- Use the user's own GitHub account. Never use another person's account or credentials.
+- Do not access production, deployment secrets, DNS, SSH keys, server configuration, or the VPS during setup.
+- Do not edit project files, create branches, commit, push, merge, or deploy during first-time setup.
 
 ## If the AI cannot use the computer
 
-Some AI chat or desktop applications can explain commands but cannot operate the user's Terminal or install software. In that case:
-
-1. Ask the AI to show one command at a time.
-2. Run the command yourself in Terminal, PowerShell, or the appropriate Linux terminal.
-3. Enter passwords only into the native operating-system prompt.
-4. Return the command's non-sensitive result to the AI.
-
-Never copy a password, token, private key, or one-time browser code into the AI chat.
+Some AI applications can read this page but cannot operate the user's local terminal. In that case, the AI must say so clearly and show one command at a time. The user runs the commands in their own Terminal, PowerShell, or Linux terminal and reports only non-sensitive results back to the AI.

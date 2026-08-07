@@ -57,8 +57,11 @@
         font: 0.92rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         white-space: pre-wrap;
       }
-      .prompt-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+      .prompt-actions { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; }
       button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
         padding: 10px 16px;
         color: #fff;
         background: var(--accent);
@@ -92,29 +95,22 @@
     <main>
       <section>
         <h2>Give this page to your AI assistant</h2>
-        <p>Copy and paste this message. Replace the project placeholder with the GitHub link you received from Teen Health.</p>
+        <p>Copy this short request. After reading this page, the AI will ask which Teen Health project you need if you have not provided one.</p>
         <p class="note"><strong>Claude Desktop:</strong> open the <strong>Code</strong> tab, choose <strong>Local</strong>, and select a working folder before sending this prompt. Do not use Chat or Cowork, and do not install GitHub Desktop.</p>
-        <div class="prompt" id="setup-prompt">Help me set up my computer for this Teen Health project. Use this onboarding guide first:
-https://teen-health-inc.github.io/team-onboarding/
-
-The project I need to work on is:
-[paste the project's GitHub URL or repository name here]
-
-Read and follow the onboarding instructions. If I do not yet have GitHub access, guide me through creating or signing into my own account and tell me when I need to accept an organization or repository invitation.
-
-Never ask me to paste a password, GitHub token, private key, or one-time login code into this chat. If the computer shows a password or browser approval prompt, tell me to complete it directly.
-
-If you are Claude Desktop, confirm that this is the Code tab with a Local environment. If it is Chat or Cowork, stop and tell me to switch to Code.
-
-After access is ready, detect my operating system and install or verify Git and GitHub CLI (`gh`). Do not install or suggest GitHub Desktop. Check `gh auth status`; if I am not authenticated, run `gh auth login --hostname github.com --git-protocol https --web` yourself. Wait for me to complete the browser link and one-time code, then verify authentication before cloning.
-
-Clone the target project without overwriting existing files, read its own instructions, install its required dependencies, and start its documented local development command.
-
-Do not guess which project I mean. Do not edit, commit, push, merge, deploy, or access production during setup.</div>
         <div class="prompt-actions">
-          <button type="button" id="copy-prompt">Copy prompt</button>
+          <button type="button" id="copy-prompt" aria-label="Copy onboarding prompt">
+            <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+              <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
+            </svg>
+            <span>Copy prompt</span>
+          </button>
           <span id="copy-status" role="status" aria-live="polite"></span>
         </div>
+        <div class="prompt" id="setup-prompt">Help me set up my computer for this Teen Health project. Use this onboarding guide first:
+https://teen-health-inc.github.io/team-onboarding/
+        </div>
+        <p class="note">After reading the guide, the AI should ask for the project repository if it is missing, then install the required tools and follow the target project's own instructions.</p>
       </section>
 
       <section>

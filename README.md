@@ -6,17 +6,14 @@ This repository contains onboarding instructions, not project source code. The A
 
 ## How to use this guide
 
-Give your AI assistant this public repository link together with the Teen Health project you need to work on:
+Give your AI assistant this short request. The onboarding page will tell the AI to ask which Teen Health project you need if you have not provided one yet:
 
 ```text
 Help me set up my computer for this Teen Health project. Use this onboarding guide first:
-https://github.com/Teen-Health-Inc/team-onboarding
-
-The project I need to work on is:
-[paste the project's GitHub URL or repository name here]
+https://teen-health-inc.github.io/team-onboarding/
 ```
 
-If you do not know the project repository, tell the AI to stop and ask you for it. It must not guess which Teen Health project you mean.
+If the AI asks which project you mean, provide the project's GitHub URL or repository name. It must not guess which Teen Health project you mean.
 
 You can read this guide without a GitHub account. To access a private project, you must use your own GitHub account and receive access to that repository or its organization.
 
