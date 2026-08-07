@@ -57,6 +57,20 @@
         font: 0.92rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         white-space: pre-wrap;
       }
+      .prompt-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+      button {
+        padding: 10px 16px;
+        color: #fff;
+        background: var(--accent);
+        border: 0;
+        border-radius: 8px;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+      }
+      button:hover { background: var(--accent-dark); }
+      button:focus-visible { outline: 3px solid #8cc9f3; outline-offset: 2px; }
+      #copy-status { color: var(--muted); font-size: 0.92rem; }
       .note { padding: 16px 18px; background: #eef7ff; border-left: 4px solid var(--accent); border-radius: 8px; }
       footer { width: min(920px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 48px; color: var(--muted); font-size: 0.92rem; }
       @media (max-width: 640px) {
@@ -79,7 +93,8 @@
       <section>
         <h2>Give this page to your AI assistant</h2>
         <p>Copy and paste this message. Replace the project placeholder with the GitHub link you received from Teen Health.</p>
-        <div class="prompt">Help me set up my computer for this Teen Health project. Use this onboarding guide first:
+        <p class="note"><strong>Claude Desktop:</strong> open the <strong>Code</strong> tab, choose <strong>Local</strong>, and select a working folder before sending this prompt. Do not use Chat or Cowork, and do not install GitHub Desktop.</p>
+        <div class="prompt" id="setup-prompt">Help me set up my computer for this Teen Health project. Use this onboarding guide first:
 https://teen-health-inc.github.io/team-onboarding/
 
 The project I need to work on is:
@@ -89,9 +104,17 @@ Read and follow the onboarding instructions. If I do not yet have GitHub access,
 
 Never ask me to paste a password, GitHub token, private key, or one-time login code into this chat. If the computer shows a password or browser approval prompt, tell me to complete it directly.
 
-After access is ready, detect my operating system, install or verify the tools required by the target project, clone it without overwriting existing files, read its own instructions, install dependencies, and start its documented local development command.
+If you are Claude Desktop, confirm that this is the Code tab with a Local environment. If it is Chat or Cowork, stop and tell me to switch to Code.
+
+After access is ready, detect my operating system and install or verify Git and GitHub CLI (`gh`). Do not install or suggest GitHub Desktop. Check `gh auth status`; if I am not authenticated, run `gh auth login --hostname github.com --git-protocol https --web` yourself. Wait for me to complete the browser link and one-time code, then verify authentication before cloning.
+
+Clone the target project without overwriting existing files, read its own instructions, install its required dependencies, and start its documented local development command.
 
 Do not guess which project I mean. Do not edit, commit, push, merge, deploy, or access production during setup.</div>
+        <div class="prompt-actions">
+          <button type="button" id="copy-prompt">Copy prompt</button>
+          <span id="copy-status" role="status" aria-live="polite"></span>
+        </div>
       </section>
 
       <section>
@@ -131,5 +154,19 @@ Do not guess which project I mean. Do not edit, commit, push, merge, deploy, or 
     <footer>
       Teen Health, Inc. · Public onboarding documentation · <a href="https://github.com/Teen-Health-Inc/team-onboarding">View the source repository</a>
     </footer>
+    <script>
+      const copyButton = document.getElementById('copy-prompt');
+      const prompt = document.getElementById('setup-prompt');
+      const copyStatus = document.getElementById('copy-status');
+
+      copyButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(prompt.textContent.trim());
+          copyStatus.textContent = 'Copied. Paste it into Claude Code or another coding agent.';
+        } catch (error) {
+          copyStatus.textContent = 'Copy was blocked. Select the prompt and copy it manually.';
+        }
+      });
+    </script>
   </body>
 </html>

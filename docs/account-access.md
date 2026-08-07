@@ -28,7 +28,7 @@ You may be asked to:
 
 - Verify your email address.
 - Enable two-factor authentication if the organization requires it.
-- Approve a browser login for GitHub Desktop, GitHub CLI, or an AI development tool.
+- Approve a browser login for GitHub CLI or an AI development tool.
 - Enter your computer password into the operating system's own installer or Terminal prompt.
 
 These are normal, intentional human checkpoints. Enter credentials only on the official GitHub page or in the computer's own password prompt. Never paste them into an AI conversation.

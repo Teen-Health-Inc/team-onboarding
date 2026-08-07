@@ -20,6 +20,10 @@ If you do not know the project repository, tell the AI to stop and ask you for i
 
 You can read this guide without a GitHub account. To access a private project, you must use your own GitHub account and receive access to that repository or its organization.
 
+## Claude Desktop users
+
+If you are using Claude Desktop, open the **Code** tab before giving it the setup request. Choose the **Local** environment and select an empty working folder or the folder where you want the project cloned. Do not use the Chat or Cowork tabs for this setup; they do not provide the same local coding terminal. Do not install GitHub Desktop as a workaround.
+
 ## Start here
 
 1. [Create or verify your GitHub account and project access](docs/account-access.md).

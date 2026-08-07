@@ -1,6 +1,8 @@
 # Step 2: Ask an AI assistant to set up the computer for a project
 
-Give this prompt to Codex, Claude, Cursor, Gemini, GitHub Copilot, or another AI assistant that can use the local terminal or computer. Replace the project placeholder with the actual Teen Health project URL or repository name.
+Give this prompt to Codex, Claude Code, or another AI coding assistant that can use the local terminal or computer. Replace the project placeholder with the actual Teen Health project URL or repository name.
+
+If you are using Claude Desktop, start in the **Code** tab, choose the **Local** environment, and select an empty working folder. Do not use the Chat or Cowork tabs for this setup. Do not install or suggest GitHub Desktop.
 
 ```text
 Set up this computer for the Teen Health, Inc. project at [paste the project's GitHub URL or repository name here].
@@ -12,9 +14,9 @@ First, detect whether this is macOS, Windows, or Linux. Check which required too
 
 Required tools:
 - Git
-- GitHub Desktop or GitHub CLI (`gh`)
+- GitHub CLI (`gh`)
 
-Use official installation methods only. For a nontechnical user, prefer GitHub Desktop on macOS or Windows because it provides a graphical GitHub login and repository-cloning flow. Use GitHub CLI when it is already installed or when the user prefers the terminal. Do not assume Homebrew is installed.
+Use official installation methods only. Install GitHub CLI (`gh`) using the platform's official package instructions. Do not assume Homebrew is installed. Do not install or suggest GitHub Desktop.
 
 Do not assume this is a JavaScript or website project. After cloning the target project, read its README and project instructions to determine the required runtime, package manager, dependencies, development command, and validation commands. Install only what that project requires.
 
@@ -26,14 +28,19 @@ Security rules:
 - Do not access production, the VPS, deployment secrets, DNS, SSH keys, or server configuration.
 
 After the tools are ready:
-1. Verify Git, GitHub Desktop or `gh`, Node.js, and npm.
-2. Confirm that my own GitHub account can access the target project.
-3. Clone the target repository into a normal development folder, without overwriting an existing folder.
-4. Read its `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and any project-specific setup or development documentation that exists.
-5. Install the dependencies using the project's documented package manager and command.
-6. Run the project's documented local development command and tell me how to open or use it.
+1. Verify Git and `gh`.
+2. Check `gh auth status`. If it is not authenticated to GitHub.com, run this command yourself:
 
-Do not edit project files, create a branch, commit, push, merge, or deploy anything during this setup. If the project URL is missing, access, permissions, network, or an existing folder prevents progress, stop and explain the exact next action instead of guessing.
+   `gh auth login --hostname github.com --git-protocol https --web`
+
+   Do not merely tell me to run it. Wait for the command to open or display GitHub's browser link and one-time verification code. Tell me to open the link and enter the code on GitHub's page. Do not ask me to paste the code into this chat. Wait until I finish, then run `gh auth status` again.
+3. Confirm that my own GitHub account can access the target project.
+4. Clone the target repository into a normal development folder, without overwriting an existing folder.
+5. Read its `README.md`, `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and any project-specific setup or development documentation that exists.
+6. Install the dependencies using the project's documented package manager and command.
+7. Run the project's documented local development command and tell me how to open or use it.
+
+Do not edit project files, create a branch, commit, push, merge, or deploy anything during this setup. If I am not using a local Code/terminal-capable session, stop and tell me to switch to one. If the project URL is missing, access, permissions, network, or an existing folder prevents progress, stop and explain the exact next action instead of guessing.
 ```
 
 ## If the AI cannot use the computer
