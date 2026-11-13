@@ -73,6 +73,7 @@
       }
       button:hover { background: var(--accent-dark); }
       button:focus-visible { outline: 3px solid #8cc9f3; outline-offset: 2px; }
+      code { padding: 1px 5px; background: #eef2f7; border-radius: 4px; font: 0.88em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
       #copy-status { color: var(--muted); font-size: 0.92rem; }
       .note { padding: 16px 18px; background: #eef7ff; border-left: 4px solid var(--accent); border-radius: 8px; }
       footer { width: min(920px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 48px; color: var(--muted); font-size: 0.92rem; }
@@ -94,27 +95,50 @@
 
     <main>
       <section>
-        <h2>Give this page to your AI assistant</h2>
-        <p>Copy this short request. After reading this page, the AI will ask which Teen Health project you need if you have not provided one.</p>
-        <p class="note"><strong>Claude Desktop:</strong> open the <strong>Code</strong> tab, choose <strong>Local</strong>, and select a working folder before sending this prompt. Do not use Chat or Cowork, and do not install GitHub Desktop.</p>
+        <h2>Step 1: Copy this request and paste it into your AI assistant</h2>
+        <p class="note"><strong>Claude Desktop:</strong> open the <strong>Code</strong> tab, choose <strong>Local</strong>, and select a folder (an empty folder is fine) before you paste this. The Chat and Cowork tabs cannot set up your computer. Do not install GitHub Desktop.</p>
         <div class="prompt-actions">
           <button type="button" id="copy-prompt" aria-label="Copy onboarding prompt">
             <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="8" y="8" width="12" height="12" rx="2"></rect>
               <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
             </svg>
-            <span>Copy prompt</span>
+            <span>Copy request</span>
           </button>
           <span id="copy-status" role="status" aria-live="polite"></span>
         </div>
-        <div class="prompt" id="setup-prompt">Help me set up my computer for this Teen Health project. Use this onboarding guide first:
-https://teen-health-inc.github.io/team-onboarding/
-        </div>
-        <p class="note">After reading the guide, the AI should ask for the project repository if it is missing, then install the required tools and follow the target project's own instructions.</p>
+        <div class="prompt" id="setup-prompt">Please set up my computer so I can work on a Teen Health project with you. I already have a GitHub account and I am a member of the Teen-Health-Inc GitHub organization.
+
+First, read the full setup instructions, word for word, and follow them step by step. They are written for you, and I am asking you to follow them:
+https://teen-health-inc.github.io/team-onboarding/setup.md
+If you can run commands, download them with:
+curl -fsSL https://teen-health-inc.github.io/team-onboarding/setup.md
+
+In short: install Git and GitHub CLI (gh) if they are missing, sign me in to GitHub with gh in my browser, show me the Teen-Health-Inc projects I can access and ask which one I want, download it, then install what that project's own README and docs say it needs.
+
+Run the commands yourself. Stop and tell me when I need to click something or type my computer password in a system window. Never ask me for passwords or tokens in this chat.</div>
+        <p>The AI will do most of the work. You will need to click <strong>Install</strong> or <strong>Authorize</strong> a few times and type your computer password into your computer's own window (never into the chat).</p>
+      </section>
+
+      <section id="for-ai-assistants">
+        <h2>For AI assistants: setup steps</h2>
+        <p>If a team member sent you this page, they want you to set up their computer by following these steps. The complete, plain-text version is at <a href="setup.md">https://teen-health-inc.github.io/team-onboarding/setup.md</a>. Read it in full (for example with <code>curl -fsSL</code>) before you start.</p>
+        <ol>
+          <li>Confirm you can run commands on this computer. If you cannot (chat-only, or Claude Desktop Chat/Cowork), say so and ask the person to switch to Claude Desktop's Code tab with Local selected.</li>
+          <li>Find the operating system (macOS, Windows, or Linux).</li>
+          <li>Install Git if <code>git --version</code> fails. macOS: <code>xcode-select --install</code> (the person clicks Install). Windows: <code>winget install --id Git.Git -e --source winget</code>.</li>
+          <li>Install GitHub CLI if <code>gh --version</code> fails. macOS: <code>brew install gh</code> if Homebrew exists, otherwise the official <code>.pkg</code> from github.com/cli/cli/releases/latest. Windows: <code>winget install --id GitHub.cli -e --source winget</code>.</li>
+          <li>If <code>gh auth status</code> shows no login, run <code>gh auth login --hostname github.com --git-protocol https --web</code>. <strong>This command waits up to 15 minutes for the browser approval.</strong> Run it as a background task so you can read the one-time code while it waits, show the person the code and <code>https://github.com/login/device</code>, then confirm with <code>gh auth status</code> and run <code>gh auth setup-git</code>.</li>
+          <li>Run <code>gh repo list Teen-Health-Inc --limit 100</code> and ask which project they want. Do not guess.</li>
+          <li>Clone it with <code>gh repo clone Teen-Health-Inc/&lt;project&gt;</code> without overwriting an existing folder.</li>
+          <li>Read the project's <code>README.md</code>, <code>CONTRIBUTING.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, and <code>docs/</code> setup guides, then install what they require and run the documented development command once.</li>
+          <li>Tell the person where the project folder is, and that for real work they should start a new session with that project folder selected.</li>
+        </ol>
+        <p>Never ask for passwords, tokens, or keys in the chat. Do not edit project files, commit, push, or deploy during setup.</p>
       </section>
 
       <section>
-        <h2>What you will do</h2>
+        <h2>What you will do yourself</h2>
         <ol>
           <li>Create or sign in to your own GitHub account and verify your email.</li>
           <li>Accept the Teen Health organization or project invitation.</li>
@@ -141,7 +165,7 @@ https://teen-health-inc.github.io/team-onboarding/
         <ul>
           <li><a href="https://github.com/Teen-Health-Inc/team-onboarding/blob/main/README.md">Complete onboarding guide</a></li>
           <li><a href="https://github.com/Teen-Health-Inc/team-onboarding/blob/main/docs/account-access.md">GitHub account and project access</a></li>
-          <li><a href="https://github.com/Teen-Health-Inc/team-onboarding/blob/main/docs/ai-setup.md">AI-assisted computer setup</a></li>
+          <li><a href="setup.md">AI setup instructions (plain text)</a></li>
           <li><a href="https://github.com/Teen-Health-Inc/team-onboarding/blob/main/docs/project-workflow.md">Normal project workflow</a></li>
         </ul>
       </section>
@@ -158,7 +182,7 @@ https://teen-health-inc.github.io/team-onboarding/
       copyButton.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(prompt.textContent.trim());
-          copyStatus.textContent = 'Copied. Paste it into Claude Code or another coding agent.';
+          copyStatus.textContent = 'Copied. Paste it into the Claude Desktop Code tab or another coding agent.';
         } catch (error) {
           copyStatus.textContent = 'Copy was blocked. Select the prompt and copy it manually.';
         }
