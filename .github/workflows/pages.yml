@@ -28,6 +28,9 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Publish the AI setup instructions as plain text
+        run: cp docs/ai-setup.md site/setup.md
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:

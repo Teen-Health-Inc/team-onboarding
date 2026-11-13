@@ -6,14 +6,11 @@ This repository contains onboarding instructions, not project source code. The A
 
 ## How to use this guide
 
-Give your AI assistant this short request. The onboarding page will tell the AI to ask which Teen Health project you need if you have not provided one yet:
+Open <https://teen-health-inc.github.io/team-onboarding/>, click **Copy request**, and paste it into your AI assistant. The request tells the AI to read the plain-text setup instructions at <https://teen-health-inc.github.io/team-onboarding/setup.md> and follow them.
 
-```text
-Help me set up my computer for this Teen Health project. Use this onboarding guide first:
-https://teen-health-inc.github.io/team-onboarding/
-```
+The request includes the main steps itself. Do not shorten it to only the link: an AI that only gets a link may receive a short summary of the page instead of the steps, and may treat instructions it finds on a web page with caution unless you ask it to follow them.
 
-If the AI asks which project you mean, provide the project's GitHub URL or repository name. It must not guess which Teen Health project you mean.
+If the AI asks which project you mean, choose one from the list it shows you, or give it the project's GitHub URL. It must not guess which Teen Health project you mean.
 
 You can read this guide without a GitHub account. To access a private project, you must use your own GitHub account and receive access to that repository or its organization.
 
@@ -24,7 +21,7 @@ If you are using Claude Desktop, open the **Code** tab before giving it the setu
 ## Start here
 
 1. [Create or verify your GitHub account and project access](docs/account-access.md).
-2. [Ask your AI assistant to set up your computer](docs/ai-setup.md).
+2. [Ask your AI assistant to set up your computer](docs/ai-setup.md). This file is written for the AI and is published as `setup.md` on the onboarding site.
 3. [Follow the normal project change workflow](docs/project-workflow.md).
 
 ## What the AI can and cannot do
